@@ -26,3 +26,21 @@ X_train, X_test, y_train, y_test = train_test_split(
 rf_classif = load("rf_classif.model")
 
 y_test_preds = rf_classif.predict(X_test)
+
+# Dashboard
+st.title("Wine Type :red[Prediction] :chart_with_upwards_trend: :bar_chart: :tea: :coffee:")
+st.markdown("Predict wine type based on the ingredient values")
+
+tab1, tab2, tab3 = st.tabs(["Data :clipboard:", "Global Performance :weight_lifter:", "Local Performance :bicyclist:"])
+
+with tab1:
+    st.header("Wine Dataset")
+    st.write(wine_df)
+
+with tab2:
+    conf_mat_fig = plt.figure(figsize=(6,6))
+    ax1 = conf_mat_fig.add_subplot(111)
+    skplt.metrics.plot_confusion_matrix(y_test, y_test_preds, ax= ax1)
+    st.pyplot(conf_mat_fig, use_container_width=True)
+
+    
